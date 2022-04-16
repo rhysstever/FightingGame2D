@@ -25,9 +25,11 @@ public class Character2DController : MonoBehaviour
 
 	private void OnEnable()
 	{
+        // Set the movement input action based on the player
         movement = playerNum == "player1" ? playerInputActions.Player.Movement1 : playerInputActions.Player.Movement2;
         movement.Enable();
 
+        // Set the attack input action based on the player
         attack = playerNum == "player1" ? playerInputActions.Player.Attack1 : playerInputActions.Player.Attack2;
         attack.Enable();
     }
@@ -70,8 +72,13 @@ public class Character2DController : MonoBehaviour
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
     }
 
+    /// <summary>
+    /// Makes the player crouch/dunk
+    /// </summary>
     private void Crouch()
 	{
         Debug.Log("Crouched");
+
+        // Change the box collider to be a smaller one
 	}
 }

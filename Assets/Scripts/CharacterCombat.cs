@@ -4,19 +4,37 @@ using UnityEngine;
 
 public class CharacterCombat : MonoBehaviour
 {
-    public Transform attackPoint;
-    public float attackRange = 0.5f;
-    public LayerMask playerLayer;
+    // Player stats
+    private float maxHealth;
+    private float currentHealth;
+    private float damage;
+    private float attackSpeed;
+    private float attackRange;
 
-    public float attackSpeed = 2.0f;
+    // Misc fields
+    public Transform attackPoint;
+    public LayerMask playerLayer;
     private float nextAttackTime = 0.0f;
 
-    // Update is called once per frame
+    private void Start()
+	{
+        maxHealth = 100.0f;
+        currentHealth = maxHealth;
+        damage = 20.0f;
+        attackSpeed = 2.0f;
+        attackRange = 0.5f;
+
+        nextAttackTime = 0.0f;
+    }
+
     private void Update()
     {
         
     }
 
+    /// <summary>
+    /// Creates an attack for the player
+    /// </summary>
     public void Attack()
 	{
         if(Time.time >= nextAttackTime)
@@ -26,12 +44,33 @@ public class CharacterCombat : MonoBehaviour
 
             foreach(Collider2D hitEnemy in hitEnemies)
             {
+                // Ensure the player isnt hitting itself
                 if(hitEnemy.gameObject != gameObject)
-                    Debug.Log(hitEnemy.name);
+                {
+                    Debug.Log(gameObject.name + " hits " + hitEnemy.gameObject.name + " for " + damage + " damage!");
+                    hitEnemy.GetComponent<CharacterCombat>().TakeDamage(damage);
+				}
             }
 
             // Set when the player can attack again
             nextAttackTime = Time.time + 1.0f / attackSpeed;
+        }
+	}
+
+    /// <summary>
+    /// Deals damage to the player
+    /// </summary>
+    /// <param name="amount">The amount of damage taken</param>
+    public void TakeDamage(float amount)
+	{
+        currentHealth -= amount;
+
+        // Check for death
+        if(currentHealth <= 0)
+		{
+            Debug.Log(gameObject.name + " has died");
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<BoxCollider2D>().enabled = false;
         }
 	}
 }
