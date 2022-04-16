@@ -12,29 +12,26 @@ public class CharacterCombat : MonoBehaviour
     private float nextAttackTime = 0.0f;
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(Time.time >= nextAttackTime)
-        {
-            if(Input.GetAxis(
-                CharacterManager.instance.GetPlayerSpecificInput(
-                    InputType.Attack, 
-                    GetComponent<Character2DController>().playerNum)) > 0.0f) 
-            {
-                Attack();
-                nextAttackTime = Time.time + 1.0f / attackSpeed;
-            }
-        }
+        
     }
 
-    void Attack()
+    public void Attack()
 	{
-        Collider2D[] hitEnemies =  Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
+        if(Time.time >= nextAttackTime)
+        {
+            // Get an array of all the enemies hit
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
 
-        foreach(Collider2D hitEnemy in hitEnemies)
-		{
-            if(hitEnemy.gameObject != gameObject)
-                Debug.Log(hitEnemy.name);
-		}
+            foreach(Collider2D hitEnemy in hitEnemies)
+            {
+                if(hitEnemy.gameObject != gameObject)
+                    Debug.Log(hitEnemy.name);
+            }
+
+            // Set when the player can attack again
+            nextAttackTime = Time.time + 1.0f / attackSpeed;
+        }
 	}
 }
