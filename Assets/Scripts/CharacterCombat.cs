@@ -27,9 +27,16 @@ public class CharacterCombat : MonoBehaviour
         nextAttackTime = 0.0f;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        
+        // Attacking conditions: 
+        // 1) It must be the game state
+        // 2) The player must have waited enough time since its last attack
+        // 3) The "Attack" input for that character has been pressed
+        if(GameManager.instance.GetCurrentMenuState() == MenuState.Game
+            && Time.time >= nextAttackTime
+            && GetComponent<Character2DController>().GetInputAction(Action.Attack).triggered)
+                Attack();
     }
 
     /// <summary>
@@ -37,24 +44,21 @@ public class CharacterCombat : MonoBehaviour
     /// </summary>
     public void Attack()
 	{
-        if(Time.time >= nextAttackTime)
+        // Get an array of all the enemies hit
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
+
+        foreach(Collider2D hitEnemy in hitEnemies)
         {
-            // Get an array of all the enemies hit
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
-
-            foreach(Collider2D hitEnemy in hitEnemies)
+            // Ensure the player isnt hitting itself
+            if(hitEnemy.gameObject != gameObject)
             {
-                // Ensure the player isnt hitting itself
-                if(hitEnemy.gameObject != gameObject)
-                {
-                    Debug.Log(gameObject.name + " hits " + hitEnemy.gameObject.name + " for " + damage + " damage!");
-                    hitEnemy.GetComponent<CharacterCombat>().TakeDamage(damage);
-				}
-            }
-
-            // Set when the player can attack again
-            nextAttackTime = Time.time + 1.0f / attackSpeed;
+                Debug.Log(gameObject.name + " hits " + hitEnemy.gameObject.name + " for " + damage + " damage!");
+                hitEnemy.GetComponent<CharacterCombat>().TakeDamage(damage);
+			}
         }
+
+        // Set when the player can attack again
+        nextAttackTime = Time.time + 1.0f / attackSpeed;
 	}
 
     /// <summary>
@@ -71,6 +75,7 @@ public class CharacterCombat : MonoBehaviour
             Debug.Log(gameObject.name + " has died");
             GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<BoxCollider2D>().enabled = false;
+			GameManager.instance.ChangeMenuState(MenuState.PostGame);
         }
 	}
 }

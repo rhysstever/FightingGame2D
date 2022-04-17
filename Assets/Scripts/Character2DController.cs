@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum Action
+{
+    Movement,
+    Attack,
+    Special,
+    Select
+}
+
 public class Character2DController : MonoBehaviour
 {
     public float movementSpeed = 1;
@@ -10,47 +18,78 @@ public class Character2DController : MonoBehaviour
 
     private string playerNum;  
     private Rigidbody2D rb;
-    private PlayerInputActions playerInputActions;
-    private InputAction movement;
-    private InputAction attack;
     private Vector2 movementVec2;
+    private bool isReady;
+
+    private PlayerInputActions playerInputActions;
+    private Dictionary<Action, InputAction> inputActions;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
 
         playerNum = gameObject.name;
-        playerInputActions = new PlayerInputActions();        
+        playerInputActions = new PlayerInputActions();
+        inputActions = new Dictionary<Action, InputAction>();
     }
 
 	private void OnEnable()
 	{
-        // Set the movement input action based on the player
-        movement = playerNum == "player1" ? playerInputActions.Player.Movement1 : playerInputActions.Player.Movement2;
-        movement.Enable();
+        // Get input actions based on which player it is
+        InputAction movement = playerNum == "player1" ? playerInputActions.Player.Movement1 : playerInputActions.Player.Movement2;
+        InputAction attack = playerNum == "player1" ? playerInputActions.Player.Attack1 : playerInputActions.Player.Attack2;
+        InputAction special = playerNum == "player1" ? playerInputActions.Player.Special1 : playerInputActions.Player.Special2;
+        InputAction select = playerNum == "player1" ? playerInputActions.Player.Select1 : playerInputActions.Player.Select2;
 
-        // Set the attack input action based on the player
-        attack = playerNum == "player1" ? playerInputActions.Player.Attack1 : playerInputActions.Player.Attack2;
-        attack.Enable();
+        // Add each input action to the dictionary
+        inputActions = new Dictionary<Action, InputAction>();
+        inputActions.Add(Action.Movement, movement);
+        inputActions.Add(Action.Attack, attack);
+        inputActions.Add(Action.Special, special);
+        inputActions.Add(Action.Select, select);
+
+        // Enable all input actions
+        foreach(InputAction inputAction in inputActions.Values)
+            inputAction.Enable();
     }
 
 	private void OnDisable()
-	{
-		movement.Disable();
-        attack.Disable();
+    {
+        foreach(InputAction inputAction in inputActions.Values)
+            inputAction.Disable();
     }
 
 	private void FixedUpdate()
     {
-        // Movement checks
-        movementVec2 = movement.ReadValue<Vector2>();
-        if(movementVec2.x != 0.0f) Move(movementVec2.x);
-        if(movementVec2.y > 0.0f) Jump();
-        if(movementVec2.y < 0.0f) Crouch();
-
-        // Attack check
-        if(attack.triggered)
-            GetComponent<CharacterCombat>().Attack();
+        switch(GameManager.instance.GetCurrentMenuState())
+        {
+            case MenuState.MainMenu:
+                break;
+            case MenuState.Select:
+                if(GetInputAction(Action.Select).triggered)
+                    isReady = true;
+                break;
+            case MenuState.Game:
+                // Check to pause game
+                if(GetInputAction(Action.Select).triggered)
+                    GameManager.instance.ChangeMenuState(MenuState.Pause);
+                // Movement checks
+                movementVec2 = inputActions[Action.Movement].ReadValue<Vector2>();
+                if(movementVec2.x != 0.0f)
+                    Move(movementVec2.x);
+                if(movementVec2.y > 0.0f)
+                    Jump();
+                if(movementVec2.y < 0.0f)
+                    Crouch();
+                break;
+            case MenuState.Pause:
+                // Check to unpause game
+                if(GetInputAction(Action.Select).triggered)
+                    GameManager.instance.ChangeMenuState(MenuState.Game);
+                break;
+            case MenuState.PostGame:
+                break;
+        }
     }
 
     /// <summary>
@@ -81,4 +120,17 @@ public class Character2DController : MonoBehaviour
 
         // Change the box collider to be a smaller one
 	}
+
+    /// <summary>
+    /// A helper method to get an input action of a player
+    /// </summary>
+    /// <param name="action">The type of input action</param>
+    /// <returns>The input action of that action type</returns>
+    public InputAction GetInputAction(Action action) { return inputActions[action]; }
+
+    /// <summary>
+    /// Gets the isReady field of the player
+    /// </summary>
+    /// <returns>Whether the player is ready</returns>
+    public bool IsReady() { return isReady; }
 }
