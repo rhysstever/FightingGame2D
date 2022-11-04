@@ -24,6 +24,8 @@ public class PlayerCombat : MonoBehaviour
     private float invulnerableTimer = 0.1f;
     private float invulnerableTimerCurrent = 0.0f;
 
+    public float GetPlayerHealth() { return health; }
+
     // Start is called before the first frame update
     void Start()
     {
