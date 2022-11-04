@@ -13,10 +13,16 @@
 2. Have a balanced cooldown (different between characters)
 
 ## Stretch Goals/Things to Consider
-- Controller support
+Environment
+- Players can jump/fall thr platforms
+- Different stage themes/designs
+
+Gameplay/Movement
 - Dodge, roll, shield, or parry system
   - Shield could have # of hits allowed before broken and player is stunned (like Smash)
-- Platforms that players can jump/fall thr
 - Double Jump
 - Directional Attacks
 - Short hop
+
+Utility
+- Controller support
