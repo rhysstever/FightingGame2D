@@ -26,3 +26,6 @@ Gameplay/Movement
 
 Utility
 - Controller support
+
+## Credits
+- Art made in [Piskel](https://www.piskelapp.com/) by me!
