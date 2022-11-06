@@ -1,13 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public enum Character
 {
-    Rhys,
+    Con,
     Grace,
-    Sam,
-    Con
+    Rhys,
+    Sam
 }
 
 public class CharacterManager : MonoBehaviour
@@ -30,14 +32,18 @@ public class CharacterManager : MonoBehaviour
     }
     #endregion
 
-    [SerializeField]
-    private Sprite ConSprite, GraceSprite, RhysSprite, SamSprite;
+    private AnimatorController[] controllers;
+
+	[SerializeField]
+	private List<Sprite> sprites;
 
     private Dictionary<Character, CharacterInfo> characterInfo;
 
     // Start is called before the first frame update
     void Start()
     {
+        controllers = Resources.LoadAll<AnimatorController>("Animations/Controllers");
+
         SetupCharacterInfoDictionary();
     }
 
@@ -49,9 +55,7 @@ public class CharacterManager : MonoBehaviour
         characterInfo = new Dictionary<Character, CharacterInfo>();
 
         // Create CharacterInfo objects and add them to the dictionary
-        characterInfo.Add(Character.Con, new CharacterInfo(ConSprite, "", ""));
-        characterInfo.Add(Character.Grace, new CharacterInfo(GraceSprite, "", ""));
-        characterInfo.Add(Character.Rhys, new CharacterInfo(RhysSprite, "", ""));
-        characterInfo.Add(Character.Sam, new CharacterInfo(SamSprite, "", ""));
+        for(int i = 0; i < controllers.Length; i++)
+            characterInfo.Add((Character)i, new CharacterInfo(sprites[i], controllers[i], "", ""));
     }
 }

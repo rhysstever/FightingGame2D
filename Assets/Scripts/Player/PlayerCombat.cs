@@ -10,37 +10,32 @@ public class PlayerCombat : MonoBehaviour
     private int playerNum;
     private Character character;
 
-    private float health = 20;
-    private float damage = 5;
-    private float attackRange = 0.5f;
-
-    private float attackSpeed = 2.0f;
+    private float attackRange = 1.0f;
+    private float attackRadius = 0.5f;
     private float attackTimerCurrent;
-
     private float specialSpeed = 2.0f;
     private float specialTimerCurrent;
 
     private bool isInvulnerable;
-    private float invulnerableTimer = 0.1f;
+    private float invulnerableTimerTotal = 0.1f;
     private float invulnerableTimerCurrent = 0.0f;
-
-    public float GetPlayerHealth() { return health; }
 
     // Start is called before the first frame update
     void Start()
     {
         playerNum = GetComponent<PlayerInfo>().GetPlayerNum;
-        character = GetComponent<PlayerInfo>().GetPlayerCharacter;
-
-        attackTimerCurrent = attackSpeed;
+        character = PlayerManager.instance.GetPlayerInfoByPlayerNum(playerNum).GetPlayerCharacter;
+        attackTimerCurrent = PlayerManager.instance.GetPlayerInfoByPlayerNum(playerNum).GetCurrentAttackSpeed;
         isInvulnerable = false;
+
+        transform.GetChild(2).localPosition = new Vector2(attackRange, 0.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
         if(Input.GetButtonDown("Attack" + playerNum) 
-            && attackTimerCurrent >= attackSpeed)
+            && attackTimerCurrent >= PlayerManager.instance.GetPlayerInfoByPlayerNum(playerNum).GetCurrentAttackSpeed)
             Attack();
 
         if(Input.GetButtonDown("Special" + playerNum)
@@ -50,20 +45,31 @@ public class PlayerCombat : MonoBehaviour
 
 	void FixedUpdate()
 	{
-        // Increment timers for both attacks
-		attackTimerCurrent += Time.deltaTime;
+        IncrementTimers();
+    }
+
+    /// <summary>
+    /// Handles all timers associated with the player
+    /// </summary>
+    private void IncrementTimers()
+	{
+        // Increment both timers for both the attack and special ability
+        attackTimerCurrent += Time.deltaTime;
         specialTimerCurrent += Time.deltaTime;
 
-        // Increment the invulnerable timer if the player is invulnerable
+        // Invulnerable timer (only if the player is invulnerable)
         if(isInvulnerable)
+		{
+            // Increment
             invulnerableTimerCurrent += Time.deltaTime;
 
-        // If the player has been invulnerable long enough, make them vulnerable and reset the timer
-        if(invulnerableTimerCurrent >= invulnerableTimer)
-		{
-            isInvulnerable = false;
-            invulnerableTimerCurrent = 0;
-		}
+            // Disable invulnerability if the time is done
+            if(invulnerableTimerCurrent >= invulnerableTimerTotal)
+            {
+                isInvulnerable = false;
+                invulnerableTimerCurrent = 0;
+            }
+        }
     }
 
     /// <summary>
@@ -73,7 +79,7 @@ public class PlayerCombat : MonoBehaviour
 	{
         attackTimerCurrent = 0;
         // Search for any objects hit by the attack
-        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
+        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, playerLayer);
 
         // Loop through all hit objects and deal damage to them
         foreach(Collider2D hitObject in hitObjects)
@@ -81,7 +87,7 @@ public class PlayerCombat : MonoBehaviour
             // Only damage others, not self
             if(hitObject.gameObject != gameObject)
 			{
-                hitObject.gameObject.GetComponent<PlayerCombat>().TakeDamage(damage);
+                hitObject.gameObject.GetComponent<PlayerCombat>().TakeDamage(PlayerManager.instance.GetPlayerInfoByPlayerNum(playerNum).GetCurrentDamage);
 			}
         }
     }
@@ -96,13 +102,9 @@ public class PlayerCombat : MonoBehaviour
         if(!isInvulnerable)
         {
             isInvulnerable = true;
-            health -= damage;
-            Debug.Log(gameObject.name + " (" + character + ") has " + health + " health left");
+            float currentHealth = PlayerManager.instance.GetPlayerInfoByPlayerNum(playerNum).LoseHealth(damage);
+            Debug.Log(gameObject.name + " (" + character + ") has " + currentHealth + " health left");
         }
-
-        // Check if the player has died
-        if(health <= 0)
-            gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -127,13 +129,8 @@ public class PlayerCombat : MonoBehaviour
         }
 	}
 
-    public void Buff()
+    public void ApplyEffect(Effect effect)
 	{
-
-	}
-
-    public void Debuff()
-	{
-
+        PlayerManager.instance.GetPlayerInfoByPlayerNum(playerNum).AddEffect(effect);
 	}
 }

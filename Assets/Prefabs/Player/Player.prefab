@@ -24,8 +24,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4777422559995953376}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.75, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4777422560051824076}
@@ -40,13 +40,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4777422560051824076}
+  - component: {fileID: 9091341640342937728}
   - component: {fileID: 4777422560051824075}
   - component: {fileID: 4777422560051824074}
   - component: {fileID: 4777422560051824073}
   - component: {fileID: 4777422560051824072}
   - component: {fileID: 4777422560051824071}
   - component: {fileID: 4777422560051824068}
-  - component: {fileID: 9091341640342937728}
   - component: {fileID: 4777422560051824070}
   - component: {fileID: 4777422560051824069}
   m_Layer: 8
@@ -74,6 +74,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9091341640342937728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4777422560051824067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d28629160b8424c8fa1ad8af6cfd8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNum: 1
+  character: 0
 --- !u!212 &4777422560051824075
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -261,20 +275,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &9091341640342937728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4777422560051824067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64d28629160b8424c8fa1ad8af6cfd8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerNum: 1
-  character: 0
 --- !u!114 &4777422560051824070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,7 +288,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 4777422560051824074}
-  runSpeed: 40
 --- !u!114 &4777422560051824069
 MonoBehaviour:
   m_ObjectHideFlags: 0

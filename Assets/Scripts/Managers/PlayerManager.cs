@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
     #region Singleton Code
     // A public reference to this script
-    public static UIManager instance = null;
+    public static PlayerManager instance = null;
 
     // Awake is called even before start 
     // (I think its at the very beginning of runtime)
@@ -23,26 +22,27 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
-    [SerializeField]
-    private List<GameObject> playerPanels;
+    private PlayerInfo[] playerInfos;
 
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < playerPanels.Count; i++)
-		{
-            Character character = PlayerManager.instance.GetPlayerInfoByIndex(i).GetPlayerCharacter;
-            playerPanels[i].transform.GetChild(0).GetComponent<TMP_Text>().text = "Player " + (i + 1) + " (" + character + ")";
-		}
+        playerInfos = GetComponentsInChildren<PlayerInfo>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0; i < playerPanels.Count; i++)
-		{
-            int playerHealth = (int)PlayerManager.instance.GetPlayerInfoByIndex(i).GetCurrentHealth;
-            playerPanels[i].transform.GetChild(1).GetComponent<TMP_Text>().text = "Health: " + playerHealth;
-		}
+        
+    }
+
+    public PlayerInfo GetPlayerInfoByPlayerNum(int playerNum)
+	{
+        return playerInfos[--playerNum];
+	}
+
+    public PlayerInfo GetPlayerInfoByIndex(int index)
+    {
+        return playerInfos[index];
     }
 }
