@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Connor_Crouch
+  m_Name: Sam_Crouch
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,7 +20,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -369169484, guid: 1fbdd36c9fec4094da616a29c413402b, type: 3}
+      value: {fileID: 1700070645, guid: d70c65e88d20bcf4db7b7c18ff87f7ba, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -40,7 +40,7 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -369169484, guid: 1fbdd36c9fec4094da616a29c413402b, type: 3}
+    - {fileID: 1700070645, guid: d70c65e88d20bcf4db7b7c18ff87f7ba, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

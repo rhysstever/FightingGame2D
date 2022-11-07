@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
 	public CharacterController2D controller;
-	//public Animator animator;
+	public Animator animator;
 
 	private int playerNum;
 
@@ -21,21 +21,20 @@ public class PlayerMovement : MonoBehaviour {
 		if(playerNum % 2 == 0)
 		{
 			horizontalMove = -0.1f;
-			//animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+			animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 		}
 	}
 
 	// Update is called once per frame
-	void Update () {
-
+	void Update () 
+	{
 		horizontalMove = Input.GetAxisRaw("Horizontal" + playerNum) * PlayerManager.instance.GetPlayerInfoByPlayerNum(playerNum).GetCurrentMoveSpeed;
-
-		//animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
 		if (Input.GetButtonDown("Jump" + playerNum))
 		{
 			jump = true;
-			//animator.SetBool("IsJumping", true);
+			animator.SetBool("IsJumping", true);
 		}
 
 		if (Input.GetButtonDown("Crouch" + playerNum))
@@ -46,12 +45,12 @@ public class PlayerMovement : MonoBehaviour {
 
 	public void OnLanding ()
 	{
-		//animator.SetBool("IsJumping", false);
+		animator.SetBool("IsJumping", false);
 	}
 
 	public void OnCrouching (bool isCrouching)
 	{
-		//animator.SetBool("IsCrouching", isCrouching);
+		animator.SetBool("IsCrouching", isCrouching);
 	}
 
 	void FixedUpdate ()

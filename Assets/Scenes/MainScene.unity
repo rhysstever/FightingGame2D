@@ -3653,11 +3653,15 @@ PrefabInstance:
     - target: {fileID: 4777422560051824068, guid: 2466dffef7823eb459daf3da8284435b, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 2ea7c519d48019b4a915c708a0672423, type: 2}
+      objectReference: {fileID: 9100000, guid: 026f850c6cce5bc4abb4b0899347dd75, type: 2}
     - target: {fileID: 4777422560051824069, guid: 2466dffef7823eb459daf3da8284435b, type: 3}
       propertyPath: playerNum
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4777422560051824070, guid: 2466dffef7823eb459daf3da8284435b, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 4777422560709383217}
     - target: {fileID: 4777422560051824074, guid: 2466dffef7823eb459daf3da8284435b, type: 3}
       propertyPath: m_WhatIsGround.m_Bits
       value: 567
@@ -3708,7 +3712,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9091341640342937728, guid: 2466dffef7823eb459daf3da8284435b, type: 3}
       propertyPath: character
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2466dffef7823eb459daf3da8284435b, type: 3}
+--- !u!95 &4777422560709383217 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4777422560051824068, guid: 2466dffef7823eb459daf3da8284435b, type: 3}
+  m_PrefabInstance: {fileID: 4777422560709383216}
+  m_PrefabAsset: {fileID: 0}
