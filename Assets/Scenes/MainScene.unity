@@ -3653,7 +3653,7 @@ PrefabInstance:
     - target: {fileID: 4777422560051824068, guid: 2466dffef7823eb459daf3da8284435b, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9100000, guid: 2ea7c519d48019b4a915c708a0672423, type: 2}
     - target: {fileID: 4777422560051824069, guid: 2466dffef7823eb459daf3da8284435b, type: 3}
       propertyPath: playerNum
       value: 1
@@ -3708,7 +3708,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9091341640342937728, guid: 2466dffef7823eb459daf3da8284435b, type: 3}
       propertyPath: character
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2466dffef7823eb459daf3da8284435b, type: 3}

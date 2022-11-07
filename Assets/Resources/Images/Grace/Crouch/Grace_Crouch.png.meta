@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3413603dd73ce1f4abde340f24bb6e65
+guid: cea527f108ff04c4b81c901768cf4d05
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,49 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sam-Idle_0
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 32
-        width: 16
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 393271b01b7566640b37b1d20475b214
-      internalID: -730445466
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sam-Idle_1
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 32
-        width: 16
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 36f98c3559dbf6348881b0c7d4ce8581
-      internalID: -1730012233
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sam-Idle_2
+      name: Grace_Crouch_0
       rect:
         serializedVersion: 2
         x: 8
@@ -166,35 +124,14 @@ TextureImporter:
         width: 16
         height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24ab35469c2a832429d3e78fb6d60128
-      internalID: -1673410102
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sam-Idle_3
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 0
-        width: 16
-        height: 20
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 41f345e3726a3854b9218930faf3eb9f
-      internalID: 222397059
+      spriteID: 0fa6bad3eb1578342a9004e7a0da6730
+      internalID: 190883470
       vertices: []
       indices: 
       edges: []
@@ -210,10 +147,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Sam-Idle_2: -1673410102
-      Sam-Idle_1: -1730012233
-      Sam-Idle_3: 222397059
-      Sam-Idle_0: -730445466
+      Grace_Crouch_0: 190883470
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

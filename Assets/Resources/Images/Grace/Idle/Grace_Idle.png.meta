@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c5bba7b5f8bff4c46a01ab3d983b94af
+guid: 58e9a63f538406a46b7ab56aecc8cf4e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,7 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rhys-Idle_0
+      name: Grace_Idle_0
       rect:
         serializedVersion: 2
         x: 8
@@ -124,20 +124,20 @@ TextureImporter:
         width: 16
         height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 82d64440053704e448edb03c83870527
-      internalID: -1563055884
+      spriteID: a62beacb8b9690847ba65aeb9f0226df
+      internalID: 1651866136
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rhys-Idle_1
+      name: Grace_Idle_1
       rect:
         serializedVersion: 2
         x: 40
@@ -145,20 +145,20 @@ TextureImporter:
         width: 16
         height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d8b72f2d2a44834e948899528e4d03a
-      internalID: -232399906
+      spriteID: fd2737048087cc14399ec9ae9af38eff
+      internalID: 1024413237
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rhys-Idle_2
+      name: Grace_Idle_2
       rect:
         serializedVersion: 2
         x: 8
@@ -166,20 +166,20 @@ TextureImporter:
         width: 16
         height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca23db4fe4937f547949c84fb3a03533
-      internalID: 1609797762
+      spriteID: 6ad733d260baee34a9e35384147f0c96
+      internalID: 664752875
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rhys-Idle_3
+      name: Grace_Idle_3
       rect:
         serializedVersion: 2
         x: 40
@@ -187,14 +187,14 @@ TextureImporter:
         width: 16
         height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57db6b61c6b89c2469a04a583c4ce579
-      internalID: -150150176
+      spriteID: ad2bef7cc6aa79641812011fa6669292
+      internalID: -1739513775
       vertices: []
       indices: 
       edges: []
@@ -210,10 +210,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Rhys-Idle_3: -150150176
-      Rhys-Idle_1: -232399906
-      Rhys-Idle_0: -1563055884
-      Rhys-Idle_2: 1609797762
+      Grace_Idle_1: 1024413237
+      Grace_Idle_2: 664752875
+      Grace_Idle_3: -1739513775
+      Grace_Idle_0: 1651866136
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

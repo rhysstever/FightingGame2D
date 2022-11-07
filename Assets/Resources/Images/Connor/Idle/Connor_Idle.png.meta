@@ -116,7 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Connor-Idle_0
+      name: Connor_Idle_0
       rect:
         serializedVersion: 2
         x: 8
@@ -124,20 +124,20 @@ TextureImporter:
         width: 16
         height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1bd3d786c70c0f54cb112157415d399f
-      internalID: 1319366121
+      spriteID: aa6f60b1b703bfa40a7819cc8afdc04b
+      internalID: 741923017
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Connor-Idle_1
+      name: Connor_Idle_1
       rect:
         serializedVersion: 2
         x: 40
@@ -145,20 +145,20 @@ TextureImporter:
         width: 16
         height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5bbc3db4550dc5c4788ae402c74e0e38
-      internalID: -278874869
+      spriteID: b8b8ca9f62f871f4993999508ee4f0d3
+      internalID: 1116753908
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Connor-Idle_2
+      name: Connor_Idle_2
       rect:
         serializedVersion: 2
         x: 8
@@ -166,20 +166,20 @@ TextureImporter:
         width: 16
         height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7eefeeecb3900734ab016da85ddfc11f
-      internalID: 1207795879
+      spriteID: 68d5ca31c8913fc42b45fc69846388a8
+      internalID: 279356544
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Connor-Idle_3
+      name: Connor_Idle_3
       rect:
         serializedVersion: 2
         x: 40
@@ -187,14 +187,14 @@ TextureImporter:
         width: 16
         height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a9f79fec95e609640960fbf42d0e017b
-      internalID: 138804417
+      spriteID: 11dc1b60045ecbc47a3afc1eb2ce682e
+      internalID: -93660435
       vertices: []
       indices: 
       edges: []
@@ -210,10 +210,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Connor-Idle_2: 1207795879
-      Connor-Idle_3: 138804417
-      Connor-Idle_1: -278874869
-      Connor-Idle_0: 1319366121
+      Connor_Idle_1: 1116753908
+      Connor_Idle_0: 741923017
+      Connor_Idle_2: 279356544
+      Connor_Idle_3: -93660435
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
