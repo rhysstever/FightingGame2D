@@ -28,19 +28,22 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		horizontalMove = Input.GetAxisRaw("Horizontal" + playerNum) * PlayerManager.instance.GetPlayerInfoByPlayerNum(playerNum).GetCurrentMoveSpeed;
-		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-
-		if (Input.GetButtonDown("Jump" + playerNum))
+		if(MenuManager.instance.CurrentMenuState == MenuState.Game)
 		{
-			jump = true;
-			animator.SetBool("IsJumping", true);
-		}
+			horizontalMove = Input.GetAxisRaw("Horizontal" + playerNum) * PlayerManager.instance.GetPlayerInfoByPlayerNum(playerNum).GetCurrentMoveSpeed;
+			animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
-		if (Input.GetButtonDown("Crouch" + playerNum))
-			crouch = true;
-		else if (Input.GetButtonUp("Crouch" + playerNum))
-			crouch = false;
+			if(Input.GetButtonDown("Jump" + playerNum))
+			{
+				jump = true;
+				animator.SetBool("IsJumping", true);
+			}
+
+			if(Input.GetButtonDown("Crouch" + playerNum))
+				crouch = true;
+			else if(Input.GetButtonUp("Crouch" + playerNum))
+				crouch = false;
+		}
 	}
 
 	public void OnLanding ()

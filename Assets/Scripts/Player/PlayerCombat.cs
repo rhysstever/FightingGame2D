@@ -34,13 +34,16 @@ public class PlayerCombat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Attack" + playerNum) 
-            && attackTimerCurrent >= PlayerManager.instance.GetPlayerInfoByPlayerNum(playerNum).GetCurrentAttackSpeed)
-            Attack();
+        if(MenuManager.instance.CurrentMenuState == MenuState.Game)
+        {
+            if(Input.GetButtonDown("Attack" + playerNum)
+                && attackTimerCurrent >= PlayerManager.instance.GetPlayerInfoByPlayerNum(playerNum).GetCurrentAttackSpeed)
+                Attack();
 
-        if(Input.GetButtonDown("Special" + playerNum)
-            && specialTimerCurrent >= specialSpeed)
-            Special(character);
+            if(Input.GetButtonDown("Special" + playerNum)
+                && specialTimerCurrent >= specialSpeed)
+                Special(character);
+        }
     }
 
 	void FixedUpdate()

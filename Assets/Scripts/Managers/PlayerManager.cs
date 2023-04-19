@@ -9,7 +9,6 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager instance = null;
 
     // Awake is called even before start 
-    // (I think its at the very beginning of runtime)
     private void Awake()
     {
         // If the reference for this script is null, assign it this script

@@ -19,7 +19,6 @@ public class CharacterManager : MonoBehaviour
     public static CharacterManager instance = null;
 
     // Awake is called even before start 
-    // (I think its at the very beginning of runtime)
     private void Awake()
     {
         // If the reference for this script is null, assign it this script
@@ -35,9 +34,11 @@ public class CharacterManager : MonoBehaviour
     private AnimatorController[] controllers;
 
 	[SerializeField]
-	private List<Sprite> sprites;
+	private List<Sprite> idleSpriteFrameZeros;
 
     private Dictionary<Character, CharacterInfo> characterInfo;
+
+    public CharacterInfo GetCharacterInfo(Character character) { return characterInfo[character]; }
 
     // Start is called before the first frame update
     void Start()
@@ -47,8 +48,6 @@ public class CharacterManager : MonoBehaviour
         SetupCharacterInfoDictionary();
     }
 
-    public CharacterInfo GetCharacterInfo(Character character) { return characterInfo[character]; }
-
     private void SetupCharacterInfoDictionary()
 	{
         // Instaniate dictionary
@@ -56,6 +55,6 @@ public class CharacterManager : MonoBehaviour
 
         // Create CharacterInfo objects and add them to the dictionary
         for(int i = 0; i < controllers.Length; i++)
-            characterInfo.Add((Character)i, new CharacterInfo(sprites[i], controllers[i], "", ""));
+            characterInfo.Add((Character)i, new CharacterInfo(idleSpriteFrameZeros[i], controllers[i], "", ""));
     }
 }
