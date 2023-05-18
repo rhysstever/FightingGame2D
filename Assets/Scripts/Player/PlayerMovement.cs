@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour {
 	private bool jump = false;
 	private bool crouch = false;
 
+	private bool canMove;
+
 	void Start()
 	{
 		playerNum = GetComponent<PlayerInfo>().GetPlayerNum;
@@ -28,7 +30,9 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(MenuManager.instance.CurrentMenuState == MenuState.Game)
+		canMove = MenuManager.instance.CurrentMenuState == MenuState.Game;
+
+		if(canMove)
 		{
 			horizontalMove = Input.GetAxisRaw("Horizontal" + playerNum) * PlayerManager.instance.GetPlayerInfoByPlayerNum(playerNum).GetCurrentMoveSpeed;
 			animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
@@ -58,8 +62,10 @@ public class PlayerMovement : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
-		// Move our character
-		controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
-		jump = false;
+		if(canMove)
+		{
+			controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
+			jump = false;
+		}
 	}
 }

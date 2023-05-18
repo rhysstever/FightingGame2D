@@ -48,6 +48,9 @@ public class CharacterManager : MonoBehaviour
         SetupCharacterInfoDictionary();
     }
 
+    /// <summary>
+    /// Creates Character objects for every index of the Character enum
+    /// </summary>
     private void SetupCharacterInfoDictionary()
 	{
         // Instaniate dictionary
@@ -57,4 +60,37 @@ public class CharacterManager : MonoBehaviour
         for(int i = 0; i < controllers.Length; i++)
             characterInfo.Add((Character)i, new CharacterInfo(idleSpriteFrameZeros[i], controllers[i], "", ""));
     }
+
+    /// <summary>
+    /// Select a new character based on currently enabled characters
+    /// </summary>
+    /// <param name="playerInfo">The playerInfo of the player selecting a new character</param>
+    /// <param name="direction">The direction of the new selection (1 is forward, -1 is back)</param>
+    /// <returns>The Character enum value of the newly selected character</returns>
+    public Character ChangeSelectedCharacter(PlayerInfo playerInfo, int direction)
+	{
+        Character currentCharacter = playerInfo.GetPlayerCharacter;
+
+        // Ensure direction is valid
+        if(direction != 1 && direction != -1)
+            return currentCharacter;
+
+        Character[] enabledCharacters = CharacterPackManager.instance.GetEnabledCharactersList();
+
+        // Find where in the array of enabled characters, the current selected character is
+        int currentIndex = Array.IndexOf(enabledCharacters, currentCharacter);
+        // Add the player's direction choice
+        currentIndex += direction;
+
+        // If the current character is the first one and the player selects "back",
+        // select the last enabled character in the array
+        if(currentIndex < 0)    
+            return enabledCharacters[enabledCharacters.Length - 1];
+        // If the current character is the last one and the player selects "forward",
+        // select the first enabled character in the array
+        else if(currentIndex >= enabledCharacters.Length)
+            return enabledCharacters[0];
+        else 
+            return enabledCharacters[currentIndex];
+	}
 }

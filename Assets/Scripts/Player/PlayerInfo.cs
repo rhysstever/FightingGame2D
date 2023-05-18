@@ -36,15 +36,26 @@ public class PlayerInfo : MonoBehaviour
 
         // Set the gameobject's name
 		gameObject.name = "Player" + playerNum;
-        // Set the gameobject's sprite and animator controller
-        GetComponent<SpriteRenderer>().sprite = CharacterManager.instance.GetCharacterInfo(character).Sprite;
-        GetComponent<Animator>().runtimeAnimatorController = CharacterManager.instance.GetCharacterInfo(character).AnimatorController;
     }
 
 	void FixedUpdate()
 	{
 		HandleEffects();
 	}
+
+    /// <summary>
+    /// Changes the current character of the player, resetting all inits
+    /// </summary>
+    /// <param name="character">The new character</param>
+    /// <param name="characterSpriteIdleFrame0">The first idle frame of the new character</param>
+    public void ChangeCharacter(Character character, Sprite characterSpriteIdleFrame0)
+	{
+        this.character = character;
+        GetComponent<SpriteRenderer>().sprite = characterSpriteIdleFrame0;
+        // Set the gameobject's sprite and animator controller
+        GetComponent<SpriteRenderer>().sprite = CharacterManager.instance.GetCharacterInfo(character).Sprite;
+        GetComponent<Animator>().runtimeAnimatorController = CharacterManager.instance.GetCharacterInfo(character).AnimatorController;
+    }
 
     private void HandleEffects()
 	{
@@ -79,7 +90,6 @@ public class PlayerInfo : MonoBehaviour
                         moveSpeed = 0.0f;
                         break;
                 }
-
             }
         }
 

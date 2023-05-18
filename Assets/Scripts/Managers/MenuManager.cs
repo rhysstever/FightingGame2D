@@ -30,7 +30,10 @@ public class MenuManager : MonoBehaviour
     }
     #endregion
 
+    [SerializeField]
     private MenuState currentMenuState;
+    private bool isPlayer1Ready = false;
+    private bool isPlayer2Ready = false;
 
     public MenuState CurrentMenuState { get { return currentMenuState; } }
 
@@ -59,7 +62,9 @@ public class MenuManager : MonoBehaviour
                     ChangeMenuState(MenuState.CharacterSelect);
                 break;
             case MenuState.CharacterSelect:
-                if(Input.GetKeyDown(KeyCode.Return))
+                CharacterSelect();
+
+                if(isPlayer1Ready && isPlayer2Ready)
                     ChangeMenuState(MenuState.Game);
                 break;
             case MenuState.Game:
@@ -95,6 +100,9 @@ public class MenuManager : MonoBehaviour
             case MenuState.Title:
                 break;
             case MenuState.CharacterSelect:
+                isPlayer1Ready = false;
+                isPlayer2Ready = false;
+                StartupCharacterSelect();
                 break;
             case MenuState.Game:
                 break;
@@ -109,4 +117,72 @@ public class MenuManager : MonoBehaviour
 
         currentMenuState = newMenuState;
 	}
+
+    /// <summary>
+    /// Selects a character for both players (avoids bugs)
+    /// </summary>
+    private void StartupCharacterSelect()
+	{
+        Character firstEnabledCharacter = CharacterPackManager.instance.GetEnabledCharactersList()[0];
+
+        PlayerInfo player1Info = PlayerManager.instance.GetPlayerInfoByPlayerNum(1);
+        player1Info.ChangeCharacter(
+                firstEnabledCharacter,
+                CharacterManager.instance.GetCharacterInfo(firstEnabledCharacter).Sprite);
+
+        PlayerInfo player2Info = PlayerManager.instance.GetPlayerInfoByPlayerNum(2);
+        player2Info.ChangeCharacter(
+                firstEnabledCharacter,
+                CharacterManager.instance.GetCharacterInfo(firstEnabledCharacter).Sprite);
+    }
+
+    private void CharacterSelect()
+    {
+        if(Input.GetKeyDown(KeyCode.E))
+            isPlayer1Ready = !isPlayer1Ready;
+
+        if(!isPlayer1Ready)
+		{
+            if(Input.GetKeyDown(KeyCode.W))
+		    {
+                PlayerInfo player1Info = PlayerManager.instance.GetPlayerInfoByPlayerNum(1);
+                Character newCharacterSelection = CharacterManager.instance.ChangeSelectedCharacter(player1Info, 1);
+                player1Info.ChangeCharacter(
+                    newCharacterSelection, 
+                    CharacterManager.instance.GetCharacterInfo(newCharacterSelection).Sprite);
+            }
+            else if(Input.GetKeyDown(KeyCode.S))
+            {
+                PlayerInfo player1Info = PlayerManager.instance.GetPlayerInfoByPlayerNum(1);
+                Character newCharacterSelection = CharacterManager.instance.ChangeSelectedCharacter(player1Info, -1);
+                player1Info.ChangeCharacter(
+                    newCharacterSelection,
+                    CharacterManager.instance.GetCharacterInfo(newCharacterSelection).Sprite);
+            }
+		}
+        
+
+        if(Input.GetKeyDown(KeyCode.Keypad9))
+            isPlayer2Ready = !isPlayer2Ready;
+
+        if(!isPlayer2Ready)
+		{
+            if(Input.GetKeyDown(KeyCode.Keypad8))
+            {
+                PlayerInfo player2Info = PlayerManager.instance.GetPlayerInfoByPlayerNum(2);
+                Character newCharacterSelection = CharacterManager.instance.ChangeSelectedCharacter(player2Info, 1);
+                player2Info.ChangeCharacter(
+                    newCharacterSelection,
+                    CharacterManager.instance.GetCharacterInfo(newCharacterSelection).Sprite);
+            }
+            else if(Input.GetKeyDown(KeyCode.Keypad5))
+            {
+                PlayerInfo player2Info = PlayerManager.instance.GetPlayerInfoByPlayerNum(2);
+                Character newCharacterSelection = CharacterManager.instance.ChangeSelectedCharacter(player2Info, -1);
+                player2Info.ChangeCharacter(
+                    newCharacterSelection,
+                    CharacterManager.instance.GetCharacterInfo(newCharacterSelection).Sprite);
+            }
+		}
+    }
 }
