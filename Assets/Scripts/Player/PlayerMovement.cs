@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () 
+	void Update() 
 	{
 		canMove = MenuManager.instance.CurrentMenuState == MenuState.Game;
 
@@ -37,12 +37,14 @@ public class PlayerMovement : MonoBehaviour {
 			horizontalMove = Input.GetAxisRaw("Horizontal" + playerNum) * PlayerManager.instance.GetPlayerInfoByPlayerNum(playerNum).GetCurrentMoveSpeed;
 			animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
+			// Input to jump
 			if(Input.GetButtonDown("Jump" + playerNum))
 			{
 				jump = true;
 				animator.SetBool("IsJumping", true);
 			}
 
+			// Input to start/stop crouching
 			if(Input.GetButtonDown("Crouch" + playerNum))
 				crouch = true;
 			else if(Input.GetButtonUp("Crouch" + playerNum))
@@ -50,17 +52,27 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 
-	public void OnLanding ()
+	// Called from Unity Event on Player object
+	public void OnLanding()
 	{
 		animator.SetBool("IsJumping", false);
+		animator.SetBool("IsFalling", false);
 	}
 
-	public void OnCrouching (bool isCrouching)
+	// Called from Unity Event on Player object
+	public void OnCrouching(bool isCrouching)
 	{
 		animator.SetBool("IsCrouching", isCrouching);
 	}
 
-	void FixedUpdate ()
+	// Called from Unity Event on Player object
+	public void OnFalling()
+	{
+		animator.SetBool("IsJumping", false);
+		animator.SetBool("IsFalling", true);
+	}
+
+	void FixedUpdate()
 	{
 		if(canMove)
 		{
