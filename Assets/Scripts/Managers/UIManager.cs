@@ -76,6 +76,20 @@ public class UIManager : MonoBehaviour
                 break;
             case MenuState.GameEnd:
                 gameEndUIParent.SetActive(true);
+
+                int playerNum = -1;
+                Character playerCharacter = Character.Rhys;
+                foreach(GameObject playerObj in GameObject.FindGameObjectsWithTag("Player"))
+				{
+                    if(playerObj.GetComponent<PlayerInfo>().GetCurrentHealth > 0)
+					{
+                        playerNum = playerObj.GetComponent<PlayerInfo>().GetPlayerNum;
+                        playerCharacter = playerObj.GetComponent<PlayerInfo>().GetPlayerCharacter;
+                        break;
+					}
+				}
+                
+                gameEndUIParent.transform.GetChild(0).GetComponent<TMP_Text>().text = string.Format("Player {0} ({1}) Wins!", playerNum, playerCharacter);
                 break;
         }
     }

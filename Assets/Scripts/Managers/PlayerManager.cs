@@ -44,4 +44,15 @@ public class PlayerManager : MonoBehaviour
     {
         return playerInfos[index];
     }
+
+    public void FreezePlayers(bool isFrozen)
+    {
+        foreach(PlayerInfo playerInfo in playerInfos)
+		{
+            if(isFrozen)
+                playerInfo.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            else
+                playerInfo.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        }
+    }
 }

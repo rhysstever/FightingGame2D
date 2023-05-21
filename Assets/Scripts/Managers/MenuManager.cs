@@ -65,7 +65,10 @@ public class MenuManager : MonoBehaviour
                 CharacterSelect();
 
                 if(isPlayer1Ready && isPlayer2Ready)
+				{
+                    PlayerManager.instance.FreezePlayers(false);
                     ChangeMenuState(MenuState.Game);
+				}
                 break;
             case MenuState.Game:
                 // Pressing the 'P' or 'Escape' keys pauses the game
@@ -98,11 +101,11 @@ public class MenuManager : MonoBehaviour
         switch(newMenuState)
         {
             case MenuState.Title:
+                StartupCharacterSelect();
                 break;
             case MenuState.CharacterSelect:
                 isPlayer1Ready = false;
                 isPlayer2Ready = false;
-                StartupCharacterSelect();
                 break;
             case MenuState.Game:
                 break;
@@ -123,17 +126,18 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     private void StartupCharacterSelect()
 	{
+        // Freeze all players
+        PlayerManager.instance.FreezePlayers(true);
+
+        // Set the initial character of each player
         Character firstEnabledCharacter = CharacterPackManager.instance.GetEnabledCharactersList()[0];
+        Character secondEnabledCharacter = CharacterPackManager.instance.GetEnabledCharactersList()[1];
 
         PlayerInfo player1Info = PlayerManager.instance.GetPlayerInfoByPlayerNum(1);
-        player1Info.ChangeCharacter(
-                firstEnabledCharacter,
-                CharacterManager.instance.GetCharacterInfo(firstEnabledCharacter).Sprite);
+        player1Info.ChangeCharacter(firstEnabledCharacter);
 
         PlayerInfo player2Info = PlayerManager.instance.GetPlayerInfoByPlayerNum(2);
-        player2Info.ChangeCharacter(
-                firstEnabledCharacter,
-                CharacterManager.instance.GetCharacterInfo(firstEnabledCharacter).Sprite);
+        player2Info.ChangeCharacter(secondEnabledCharacter);
     }
 
     private void CharacterSelect()
@@ -147,20 +151,15 @@ public class MenuManager : MonoBehaviour
 		    {
                 PlayerInfo player1Info = PlayerManager.instance.GetPlayerInfoByPlayerNum(1);
                 Character newCharacterSelection = CharacterManager.instance.ChangeSelectedCharacter(player1Info, 1);
-                player1Info.ChangeCharacter(
-                    newCharacterSelection, 
-                    CharacterManager.instance.GetCharacterInfo(newCharacterSelection).Sprite);
+                player1Info.ChangeCharacter(newCharacterSelection);
             }
             else if(Input.GetKeyDown(KeyCode.S))
             {
                 PlayerInfo player1Info = PlayerManager.instance.GetPlayerInfoByPlayerNum(1);
                 Character newCharacterSelection = CharacterManager.instance.ChangeSelectedCharacter(player1Info, -1);
-                player1Info.ChangeCharacter(
-                    newCharacterSelection,
-                    CharacterManager.instance.GetCharacterInfo(newCharacterSelection).Sprite);
+                player1Info.ChangeCharacter(newCharacterSelection);
             }
 		}
-        
 
         if(Input.GetKeyDown(KeyCode.Keypad9))
             isPlayer2Ready = !isPlayer2Ready;
@@ -171,17 +170,13 @@ public class MenuManager : MonoBehaviour
             {
                 PlayerInfo player2Info = PlayerManager.instance.GetPlayerInfoByPlayerNum(2);
                 Character newCharacterSelection = CharacterManager.instance.ChangeSelectedCharacter(player2Info, 1);
-                player2Info.ChangeCharacter(
-                    newCharacterSelection,
-                    CharacterManager.instance.GetCharacterInfo(newCharacterSelection).Sprite);
+                player2Info.ChangeCharacter(newCharacterSelection);
             }
             else if(Input.GetKeyDown(KeyCode.Keypad5))
             {
                 PlayerInfo player2Info = PlayerManager.instance.GetPlayerInfoByPlayerNum(2);
                 Character newCharacterSelection = CharacterManager.instance.ChangeSelectedCharacter(player2Info, -1);
-                player2Info.ChangeCharacter(
-                    newCharacterSelection,
-                    CharacterManager.instance.GetCharacterInfo(newCharacterSelection).Sprite);
+                player2Info.ChangeCharacter(newCharacterSelection);
             }
 		}
     }

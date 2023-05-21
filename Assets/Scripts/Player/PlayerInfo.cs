@@ -16,7 +16,7 @@ public class PlayerInfo : MonoBehaviour
     private float currentMoveSpeed;
     private float baseDamage = 5.0f;
     private float currentDamage;
-    private float baseAttackSpeed = 2.0f;
+    private float baseAttackSpeed = 1.0f;
     private float currentAttackSpeed;
 
     private List<Effect> effects;
@@ -47,11 +47,9 @@ public class PlayerInfo : MonoBehaviour
     /// Changes the current character of the player, resetting all inits
     /// </summary>
     /// <param name="character">The new character</param>
-    /// <param name="characterSpriteIdleFrame0">The first idle frame of the new character</param>
-    public void ChangeCharacter(Character character, Sprite characterSpriteIdleFrame0)
+    public void ChangeCharacter(Character character)
 	{
         this.character = character;
-        GetComponent<SpriteRenderer>().sprite = characterSpriteIdleFrame0;
         // Set the gameobject's sprite and animator controller
         GetComponent<SpriteRenderer>().sprite = CharacterManager.instance.GetCharacterInfo(character).Sprite;
         GetComponent<Animator>().runtimeAnimatorController = CharacterManager.instance.GetCharacterInfo(character).AnimatorController;
@@ -106,7 +104,10 @@ public class PlayerInfo : MonoBehaviour
 
         // Check if the player has died
         if(baseHealth <= 0)
+		{
             gameObject.SetActive(false);
+            MenuManager.instance.ChangeMenuState(MenuState.GameEnd);
+		}
 
         return baseHealth;
     }

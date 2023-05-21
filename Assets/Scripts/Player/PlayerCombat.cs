@@ -38,7 +38,10 @@ public class PlayerCombat : MonoBehaviour
         {
             if(Input.GetButtonDown("Attack" + playerNum)
                 && attackTimerCurrent >= PlayerManager.instance.GetPlayerInfoByPlayerNum(playerNum).GetCurrentAttackSpeed)
+			{
+                GetComponent<Animator>().SetTrigger("Attack");
                 Attack();
+			}
 
             if(Input.GetButtonDown("Special" + playerNum)
                 && specialTimerCurrent >= specialSpeed)

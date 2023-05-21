@@ -8,12 +8,11 @@ public class PlayerMovement : MonoBehaviour {
 	public Animator animator;
 
 	private int playerNum;
+	private bool canMove;
 
 	private float horizontalMove = 0f;
 	private bool jump = false;
 	private bool crouch = false;
-
-	private bool canMove;
 
 	void Start()
 	{
